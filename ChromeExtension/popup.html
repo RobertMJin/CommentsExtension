@@ -1,9 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>YouTube Comments
+        <style>
+            body{
+                text-align: center;
+            }
+
+            #youtubeImage{
+                width: 128px;
+                margin: 5px;
+            }
+
+            button{
+                margin: 5px;
+                outline: none;
+            }
+
+            button:hover{
+                outline: #80deea dotted thick;
+            }
+        </style>
+    </title>
     <link rel="stylesheet" href="button.css">
   </head>
   <body>
-    <button id="changeColor"></button>
+    <img src="./youtube128.png" id="youtubeImage">
+    <input type="button" onClick="changeLikes()" value="Sort by likes" id="likesButton"></input>
+    <input type="button" onClick="changeComments())" value="Sort by comments" id="commentsButton"></input>
+    <script src="popup.js"></script> 
   </body>
 </html>
