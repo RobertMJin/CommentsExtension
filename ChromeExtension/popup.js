@@ -1,21 +1,32 @@
-function mostLiked(){
+
+function mostLiked() {
   console.log("Likes button pressed");
+  
   chrome.tabs.query({active: true, currentWindow: true}, tabs => {
     var url = tabs[0].url;
     console.log("Url " + url);
   });
 
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, {greeting: "Likes button"}, function(response) {
-      console.log(response.farewell);
-    });
+  chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
+  var activeTab = tabs[0];
+  chrome.tabs.sendMessage(activeTab.id, {"message": "Likes button"});
+  console.log("Message Sent");
   });
-  
 }
 
-function mostReplies(){
+function mostReplies() {
   console.log("Replies button pressed");
-  chrome.runtime.sendMessage(currentWindow, "Replies Mode");
+  
+  chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+    var url = tabs[0].url;
+    console.log("Url " + url);
+  });
+
+  chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
+  var activeTab = tabs[0];
+  chrome.tabs.sendMessage(activeTab.id, {"message": "Reply button"});
+  console.log("Message Sent");
+  });
 }
 
 document.getElementById("likesButton").addEventListener("click", mostLiked);

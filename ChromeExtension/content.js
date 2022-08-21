@@ -1,13 +1,14 @@
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(gotMessage);
+
+function gotMessage(request, sender, sendResponse) {
       console.log(sender.tab ? "from a content script:" + sender.tab.url :"from the extension");
+
       if (request.greeting === "Likes button") {
         sendResponse({farewell: "Like received"});
-      } else if (request.greeting === "Replies button") {
+      } else if (request.greeting === "Reply button") {
         sendResponse({farewell: "Reply received"});
       }
-    }
-  );
+    };
 
 chrome.tabs.query({active: true, currentWindow: true}, tabs => {
 var url = tabs[0].url;
