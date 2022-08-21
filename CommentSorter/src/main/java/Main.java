@@ -16,6 +16,9 @@ import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.CommentSnippet;
 import com.google.api.services.youtube.model.CommentThread;
 import com.google.api.services.youtube.model.CommentThreadListResponse;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.File;
@@ -114,8 +117,9 @@ public class Main {
         	}
         	
         	// outputs the result to a file called output.txt
-        	PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
-        	System.setOut(out);
+        	PrintStream out = new PrintStream(new FileOutputStream("output.json"));
+        	Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            out.print(gson.toJson(totalComments));
             
         	// outputs all sorted comments
         	for (CommentThread videoComment : totalComments) {
@@ -124,9 +128,12 @@ public class Main {
                 System.out.println("Comment: " + snippet.getTextOriginal()); 
                 System.out.println("Replies: " + videoComment.getSnippet().getTotalReplyCount());
                 System.out.println("Likes: " + videoComment.getSnippet().getTopLevelComment().getSnippet().getLikeCount());
+                System.out.println("ID: " + videoComment.getId());
                 System.out.println("\n-----------------------------------------------------------------\n");
             }
             System.out.println(totalComments.size());
+            
+            
             
         }
         
