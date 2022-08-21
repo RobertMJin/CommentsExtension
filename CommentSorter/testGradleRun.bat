@@ -1,2 +1,2 @@
-gradle run --args="V-mGiBfoaok likes"
+gradlew run --args="V-mGiBfoaok likes"
 cmd /k

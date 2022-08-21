@@ -51,7 +51,7 @@ public class Main {
     		BufferedReader br = new BufferedReader(new FileReader(apikey));
     		API_KEY = br.readLine();
     	} catch (Exception e) { 
-    		System.out.println("Error loading apikey.txt. Please make sure it is in the root directory.\n " + e);
+    		System.out.println("Error loading apikey.txt. Please make sure it is in the CommentSorter directory.\n " + e);
     		System.exit(0);
     	}
     	
@@ -104,6 +104,7 @@ public class Main {
         		totalComments.sort((o1, o2) -> o2.getSnippet().getTopLevelComment().getSnippet().getLikeCount().compareTo(o1.getSnippet().getTopLevelComment().getSnippet().getLikeCount()));
         	}
         	
+        	// outputs the result to a file called output.txt
         	PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
         	System.setOut(out);
             
