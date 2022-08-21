@@ -1,12 +1,17 @@
 function mostLiked(){
-  chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
-    let url = tabs[0].url;
+  console.log("Likes button pressed");
+  chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+    var url = tabs[0].url;
+    console.log("Url " + url);
   });
-}
-
-function mostReplies(){
+  chrome.runtime.sendMessage(currentWindow, "Likes Mode");
   
 }
 
-document.getElementById("likesButton").addEventListener('click', mostLiked());
-document.getElementById("repliesButton").addEventListener('click', mostReplies);
+function mostReplies(){
+  console.log("Replies button pressed");
+  chrome.runtime.sendMessage(currentWindow, "Replies Mode");
+}
+
+document.getElementById("likesButton").addEventListener("click", mostLiked);
+document.getElementById("repliesButton").addEventListener("click", mostReplies);
