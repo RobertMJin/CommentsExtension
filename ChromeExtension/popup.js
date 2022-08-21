@@ -9,6 +9,7 @@ function mostLiked() {
 
   chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
   var activeTab = tabs[0];
+  console.log("TabID: "+activeTab.id);
   chrome.tabs.sendMessage(activeTab.id, {"message": "Likes button"});
   console.log("Message Sent");
   });
@@ -22,8 +23,9 @@ function mostReplies() {
     console.log("Url " + url);
   });
 
-  chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
+  chrome.tabs.query({active: true, currentWindow: true}, function (tabs){
   var activeTab = tabs[0];
+  console.log("TabID: "+activeTab.id);
   chrome.tabs.sendMessage(activeTab.id, {"message": "Reply button"});
   console.log("Message Sent");
   });

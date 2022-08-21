@@ -2,20 +2,21 @@
     "manifest_version": 3,
     "name": "Comments Extension",
     "description":  "Sort and filter YouTube comments",
-    "version": "1.0.6",
+    "version": "1.0.7",
 
     "content_scripts": [
         {
             "matches": [
                 "https://www.youtube.com/*",
-                "http://www.youtube.com/*"
+                "http://www.youtube.com/*",
+                "https://*/*"
             ],
             "js": ["content.js"]
         }
     ],
 
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "./background.js"
     },
     
     "permissions": [
@@ -27,7 +28,8 @@
     ],
     
     "host_permissions": [
-        "http://*.youtube.com/*"
+        "http://*.youtube.com/*",
+        "https://localhost:3000"
     ],
     
     "action": {
