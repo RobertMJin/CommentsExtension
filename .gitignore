@@ -1,2 +1,4 @@
-CommentSorter/.gradle/
-CommentSorter/lib/apikey.txt
+CommentSorter/.gradle
+CommentSorter/apikey.txt
+CommentSorter/build
+CommentSorter/output.txt

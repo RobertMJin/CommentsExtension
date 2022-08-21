@@ -1,4 +1,3 @@
-package YoutubeCommentSorter;
 
 /**
  * [Main.java]
@@ -18,12 +17,15 @@ import com.google.api.services.youtube.model.CommentSnippet;
 import com.google.api.services.youtube.model.CommentThread;
 import com.google.api.services.youtube.model.CommentThreadListResponse;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -49,7 +51,7 @@ public class Main {
     		BufferedReader br = new BufferedReader(new FileReader(apikey));
     		API_KEY = br.readLine();
     	} catch (Exception e) { 
-    		System.out.println("Error loading apikey.txt. Please make sure it is in the 'lib' folder.\n " + e);
+    		System.out.println("Error loading apikey.txt. Please make sure it is in the root directory.\n " + e);
     		System.exit(0);
     	}
     	
@@ -72,7 +74,7 @@ public class Main {
 	            .setOrder("time")
 	            .setTextFormat("html")
 	            .setMaxResults(100L)
-	            .setVideoId("PRP8qAfwJuA")
+	            .setVideoId(args[0])
 	            .setPageToken(nextToken)
 	            .execute();
 	        //System.out.println(response);
@@ -95,14 +97,23 @@ public class Main {
             System.out.println("Can't get video comments.");
         } else {
             // Sorts all comments using compareTo
-        	totalComments.sort((o1, o2) -> o1.getSnippet().getTotalReplyCount().compareTo(o2.getSnippet().getTotalReplyCount()));
+        	if (args[1].equals("replies")) {
+        		totalComments.sort((o1, o2) -> o2.getSnippet().getTotalReplyCount().compareTo(o1.getSnippet().getTotalReplyCount()));
+        	}
+        	if (args[1].equals("likes")) {
+        		totalComments.sort((o1, o2) -> o2.getSnippet().getTopLevelComment().getSnippet().getLikeCount().compareTo(o1.getSnippet().getTopLevelComment().getSnippet().getLikeCount()));
+        	}
+        	
+        	PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
+        	System.setOut(out);
             
         	// outputs all sorted comments
         	for (CommentThread videoComment : totalComments) {
             	CommentSnippet snippet = videoComment.getSnippet().getTopLevelComment().getSnippet();
                 System.out.println("Author: " + snippet.getAuthorDisplayName()); 
                 System.out.println("Comment: " + snippet.getTextOriginal()); 
-                System.out.println("Reply Count: " + videoComment.getSnippet().getTotalReplyCount());
+                System.out.println("Replies: " + videoComment.getSnippet().getTotalReplyCount());
+                System.out.println("Likes: " + videoComment.getSnippet().getTopLevelComment().getSnippet().getLikeCount());
                 System.out.println("\n-----------------------------------------------------------------\n");
             }
             System.out.println(totalComments.size());
