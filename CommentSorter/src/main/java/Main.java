@@ -117,9 +117,8 @@ public class Main {
         	}
         	
         	// outputs the result to a file called output.txt
-        	PrintStream out = new PrintStream(new FileOutputStream("output.json"));
-        	Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            out.print(gson.toJson(totalComments));
+        	PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
+        	System.setOut(out);
             
         	// outputs all sorted comments
         	for (CommentThread videoComment : totalComments) {
