@@ -8,11 +8,13 @@
             }
 
             #youtubeImage{
-                width: 128px;
+                text-align:center;
+                width: 32px;
                 margin: 5px;
             }
 
             button{
+
                 margin: 5px;
                 outline: none;
             }
@@ -25,9 +27,10 @@
     <link rel="stylesheet" href="button.css">
   </head>
   <body>
-    <img src="./youtube128.png" id="youtubeImage">
-    <input type="button" onClick="mostLiked()" value="Sort by Likes" id="likesButton"></input>
-    <input type="button" onClick="mostReplies()" value="Sort by Replies" id="repliesButton"></input>
+    <img src="./youtube32.png" id="youtubeImage">
+
+    <input type ="button" id = "likesButton" value="Sort by Likes"></input>  
+    <input type ="button" id = "repliesButton" value="Sort by Replies"></input>
     <script src="popup.js"></script> 
   </body>
 </html>

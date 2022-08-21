@@ -1,1 +1,4 @@
-console.log("Chrome extension works?");
+
+chrome.runtime.onMessage.addListener(
+    callback: function,
+  )
