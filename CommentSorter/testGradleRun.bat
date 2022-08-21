@@ -1,2 +1,2 @@
-gradlew run --args="ERo6DRIppZk replies"
+gradlew run --args="dc-TrsRG6a4 replies"
 PAUSE
