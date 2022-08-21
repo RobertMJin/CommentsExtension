@@ -1,8 +1,7 @@
 CommentSorter/.gradle
 CommentSorter/apikey.txt
-CommentSorter/output.txt
 CommentSorter/build
-CommentSorter/data.js
+CommentSorter/output.json
 .settings
 .DS_Store
 .project

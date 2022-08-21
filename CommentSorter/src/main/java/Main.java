@@ -117,10 +117,9 @@ public class Main {
         	}
         	
         	// outputs the result to a file called output.txt
-        	PrintStream out = new PrintStream(new FileOutputStream("data.js"));
-        	//Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        	Gson gson = new Gson();
-            out.print("var DATA = '" + gson.toJson(totalComments) + "';");
+        	PrintStream out = new PrintStream(new FileOutputStream("output.json"));
+        	Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            out.print(gson.toJson(totalComments));
             
         	// outputs all sorted comments
         	for (CommentThread videoComment : totalComments) {

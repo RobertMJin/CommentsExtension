@@ -11,4 +11,4 @@
 1. Navigate to /CommentSorter/
 2. Create a file named apikey.txt with a [Google API Key](https://cloud.google.com/docs/authentication/api-keys) in its contents and save it here.
 3. Open cmd and navigate to /CommentsExtension/
-4. In cmd, run `gradlew run --args="VIDEO_ID SORT_TYPE"` where `VIDEO_ID` is the id (found in the youtube url) of the video you want to get comments from and `SORT_TYPE` is set to either `replies` or `likes` depending on what you want to sort by.
+4. Run 'gradlew'
