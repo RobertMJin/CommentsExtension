@@ -65,32 +65,41 @@ public class Main {
         YouTube youtubeService = getService();
         
         // pagiates through the comment section until all available comments have been grabbed through the api
-        do {
-	        // Define and execute the API request
-	        YouTube.CommentThreads.List request = youtubeService.commentThreads()
-	            .list(Arrays.asList("snippet"));
-	        CommentThreadListResponse response = request.setKey(API_KEY)
-	            .setModerationStatus("published")
-	            .setOrder("time")
-	            .setTextFormat("html")
-	            .setMaxResults(100L)
-	            .setVideoId(args[0])
-	            .setPageToken(nextToken)
-	            .execute();
-	        //System.out.println(response);
-	        
-	        // stores the next page token to continue digging throught the comments
-	        nextToken = response.getNextPageToken();
-	        System.out.println(nextToken);
-	        
-	        // adds the newly gotten comments to the total comments arraylist
-	        
-	        totalComments.addAll(response.getItems());
-	        
-	        System.out.println(totalComments.size());
-	        //System.out.println(response.getItems().size());
-	        
-        } while (nextToken != null);
+        try {
+	        do {
+		        // Define and execute the API request
+		        YouTube.CommentThreads.List request = youtubeService.commentThreads()
+		            .list(Arrays.asList("snippet"));
+		        CommentThreadListResponse response = request.setKey(API_KEY)
+		            .setModerationStatus("published")
+		            .setOrder("time")
+		            .setTextFormat("html")
+		            .setMaxResults(100L)
+		            .setVideoId(args[0])
+		            .setPageToken(nextToken)
+		            .execute();
+		        //System.out.println(response);
+		        
+		        // stores the next page token to continue digging throught the comments
+		        nextToken = response.getNextPageToken();
+		        System.out.println(nextToken);
+		        
+		        // adds the newly gotten comments to the total comments arraylist
+		        
+		        totalComments.addAll(response.getItems());
+		        
+		        System.out.println(totalComments.size());
+		        //System.out.println(response.getItems().size());
+		        
+	        } while (nextToken != null);
+        } catch (Exception e) {
+        	if (e.toString().startsWith("com.google.api.client.googleapis.json.GoogleJsonResponseException: 403 Forbidden")) {
+        		System.out.println("Error: 403 Forbidden. Maybe comments are disabled?");
+        	} else {
+        		System.out.println(e);
+        	}
+        	
+        }
         
         // checks if there are video comments
         if (totalComments.isEmpty()) {

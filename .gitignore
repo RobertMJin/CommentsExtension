@@ -2,3 +2,6 @@ CommentSorter/.gradle
 CommentSorter/apikey.txt
 CommentSorter/build
 CommentSorter/output.txt
+.settings
+.DS_Store
+.project

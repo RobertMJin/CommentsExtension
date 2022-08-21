@@ -1,2 +1,2 @@
-gradlew run --args="V-mGiBfoaok likes"
-cmd /k
+gradlew run --args="qXevYYVZ1J8 replies"
+PAUSE
